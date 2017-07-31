@@ -76,5 +76,15 @@ Vagrant.configure("2") do |config|
     sudo usermod -aG docker $(whoami)
     sudo docker pull jenkins
     sudo docker run -p 8080:8080 --name=jenkins-master jenkins
+    wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
+    sudo chmod -R vagrant:vagrant /usr/local
+    sudo chown -R vagrant:vagrant /usr/local
+    tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=/home/vagrant/go
+    chown -R vagrant:vagrant go/
+    sudo chown -R vagrant:vagrant go/
+
   SHELL
 end
