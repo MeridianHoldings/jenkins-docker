@@ -42,8 +42,9 @@ pipeline {
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'git config --global user.email "luwade.pillay@meridianholdings.co.za"'
                     sh 'git config --global user.name "Luwade"'
-                    sh 'git checkout origin/master'
+                    sh 'git checkout origin master'
                     sh 'git merge origin/development'
+                    sh 'git commit -am "committed to master"'
                     sh 'git push origin master'
                 }
             }
