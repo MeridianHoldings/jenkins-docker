@@ -49,7 +49,7 @@ pipeline {
                     //sh 'git checkout origin/master'
                     //sh 'git merge origin/development'
                     sh 'git merge origin/master'
-                    sh 'git push origin/development:origin/master'
+                    sh 'git push origin/development:origin/master HEAD:origin/master'
                 }
             }
         }
