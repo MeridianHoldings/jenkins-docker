@@ -8,7 +8,7 @@ pipeline {
         stage('Code Analysis') {
             steps {
                 tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
+                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'echo Sonarqube'
                     sh 'printenv'
                 }
@@ -24,8 +24,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                //tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
+                tool(name: 'go', type: 'go')
+                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'go build main.go'
                     sh 'echo Build complete'
                 }
