@@ -74,5 +74,7 @@ Vagrant.configure("2") do |config|
     apt-cache policy docker-engine
     sudo apt-get install -y docker-engine
     sudo usermod -aG docker $(whoami)
+    sudo docker pull jenkins
+    sudo docker run -p 8080:8080 --name=jenkins-master jenkins
   SHELL
 end
