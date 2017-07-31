@@ -40,9 +40,9 @@ pipeline {
             steps {
                 tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                    sh 'git merge development'
+                    sh 'git merge origin/development'
                     sh 'git commit -am "Merged develop branch to master'
-                    sh 'git push origin master'
+                    sh 'git push origin/master'
                 }
             }
         }
