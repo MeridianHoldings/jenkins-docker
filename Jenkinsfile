@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                tool(name: 'go', type: 'go')
+                //tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
                     sh 'go build main.go'
                     sh 'echo Build complete'
