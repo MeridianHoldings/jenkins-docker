@@ -44,7 +44,7 @@ pipeline {
                     sh 'git config --global user.name "Luwade"'
                     sh 'git checkout origin/master'
                     sh 'git merge origin/development'
-                    sh 'git push origin HEAD:master'
+                    sh 'git push origin master --force'
                 }
             }
         }
