@@ -48,6 +48,7 @@ pipeline {
                     sh 'git merge origin/master'
                     sh 'git checkout origin/master'
                     sh 'git merge origin/development'
+                    sh 'git checkout origin/master'
                     sh 'git push origin/master'
                 }
             }
