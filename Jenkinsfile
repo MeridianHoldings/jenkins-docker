@@ -32,14 +32,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {
-                expression {
-                    currentBuild.result == 'SUCCESS'
-                }
-            }
+//            when {
+//                expression {
+//                    currentBuild.result == 'SUCCESS'
+//                }
+//            }
             steps {
-                tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+                //tool(name: 'go', type: 'go')
+                //withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'git push origin master'
                 }
             }
