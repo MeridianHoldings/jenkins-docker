@@ -9,6 +9,7 @@ pipeline {
             steps {
                 withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
                     sh 'echo Sonarqube'
+                    sh 'printenv'
                 }
             }
         }
