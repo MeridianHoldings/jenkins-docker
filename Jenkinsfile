@@ -33,7 +33,6 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                tool(name: 'go', type: 'go')
                 expression {
                     currentBuild.result == 'SUCCESS'
                 }
