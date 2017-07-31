@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Code Analysis') {
             steps {
+                tool(name: 'Go 1.8.3', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
                     sh 'echo Sonarqube'
                     sh 'printenv'
@@ -15,6 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                tool(name: 'Go 1.8.3', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'go test'
                 }
@@ -22,6 +24,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                tool(name: 'Go 1.8.3', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "GOPATH=$GOCONFIG_PATH"]) {
                     sh 'go build main.go'
                     sh 'echo Build complete'
@@ -30,11 +33,13 @@ pipeline {
         }
         stage('Deploy') {
             when {
+                tool(name: 'Go 1.8.3', type: 'go')
                 expression {
                     currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
+                tool(name: 'Go 1.8.3', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh 'git push origin master'
                 }
