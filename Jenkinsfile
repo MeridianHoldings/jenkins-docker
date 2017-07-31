@@ -45,9 +45,9 @@ pipeline {
                     //sh 'git checkout origin/master'
                     //sh 'git merge origin/development'
                     //sh 'git push origin master --force'
-                    sh 'git merge master'
-                    sh 'git checkout master'
-                    sh 'git merge development'
+                    sh 'git merge origin/master'
+                    sh 'git checkout origin/master'
+                    sh 'git merge origin/development'
                 }
             }
         }
