@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision :shell, :path => "bootstrap.sh"
   config.vm.network "forwarded_port", guest: 8080, host: 8000
   config.vm.network "forwarded_port", guest: 9000, host: 9000
+  config.vm.network "forwarded_port", guest: 5432, host: 5000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -74,17 +75,21 @@ Vagrant.configure("2") do |config|
     apt-cache policy docker-engine
     sudo apt-get install -y docker-engine
     sudo usermod -aG docker $(whoami)
-    sudo docker pull jenkins
-    sudo docker run -p 8080:8080 --name=jenkins-master jenkins
     wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
     tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
     sudo chmod -R vagrant:vagrant /usr/local
     sudo chown -R vagrant:vagrant /usr/local
     tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
-    export PATH=$PATH:/usr/local/go/bin
-    export GOPATH=/home/vagrant/go
     chown -R vagrant:vagrant go/
     sudo chown -R vagrant:vagrant go/
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=/home/vagrant/go
+    sudo docker pull jenkins
+    sudo docker pull sonarqube
+    sudo docker pull postgres
+    sudo docker run --name sonar-postgres -p 5432:5432 -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -d postgres
+    sudo docker run -d --name sonarqube --link sonar-postgres:pgsonar -p 9000:9000 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD=secret -e SONARQUBE_JDBC_URL=jdbc:postgresql://pgsonar:5432/sonar sonarqube
+    sudo docker run -p 8080:8080 --name=jenkins-master jenkins
 
   SHELL
 end

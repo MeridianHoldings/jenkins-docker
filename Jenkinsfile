@@ -7,10 +7,13 @@ pipeline {
     stages {
         stage('Code Analysis') {
             steps {
-                tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                    sh 'echo Sonarqube'
-                    sh 'printenv'
+                //tool(name: 'go', type: 'go')
+                //withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+                //    sh 'echo Sonarqube'
+                //    sh 'printenv'
+                //}
+                withSonarQubeEnv {
+                    sh "./gradlew clean sonarqube"
                 }
             }
         }
