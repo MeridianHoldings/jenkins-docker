@@ -7,15 +7,10 @@ pipeline {
     stages {
         stage('Code Analysis') {
             steps {
-                //tool(name: 'go', type: 'go')
-                //withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                //    sh 'echo Sonarqube'
-                //    sh 'printenv'
-                //}
-                // requires SonarQube Scanner 2.8+
-
-                withSonarQubeEnv('sonarqube') {
-                  sh "${scannerHome}/bin/sonar-scanner"
+                tool(name: 'go', type: 'go')
+                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+                    sh 'echo Sonarqube'
+                    sh 'printenv'
                 }
             }
         }
