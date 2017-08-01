@@ -12,9 +12,10 @@ pipeline {
                 //    sh 'echo Sonarqube'
                 //    sh 'printenv'
                 //}
-                tool(name: 'sonarqube', type: 'sonarqube')
-                withSonarQubeEnv {
-                    sh "./gradlew clean sonarqube"
+                // requires SonarQube Scanner 2.8+
+                def scannerHome = tool 'SonarQube Scanner 2.8';
+                withSonarQubeEnv('sonarcube') {
+                  sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
