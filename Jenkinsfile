@@ -14,7 +14,7 @@ pipeline {
                 //}
                 // requires SonarQube Scanner 2.8+
                 tool (name: 'sonarqube', type: 'sonarqube')
-                withSonarQubeEnv('sonarcube') {
+                withSonarQubeEnv('sonarqube') {
                   sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
