@@ -12,6 +12,7 @@ pipeline {
                 //    sh 'echo Sonarqube'
                 //    sh 'printenv'
                 //}
+                tool(name: 'sonarqube', type: 'sonarqube')
                 withSonarQubeEnv {
                     sh "./gradlew clean sonarqube"
                 }
