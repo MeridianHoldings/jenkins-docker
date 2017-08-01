@@ -13,7 +13,7 @@ pipeline {
                 //    sh 'printenv'
                 //}
                 // requires SonarQube Scanner 2.8+
-                tool (name: 'sonarqube', type: 'sonarqube')
+
                 withSonarQubeEnv('sonarqube') {
                   sh "${scannerHome}/bin/sonar-scanner"
                 }
