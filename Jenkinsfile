@@ -15,17 +15,17 @@ pipeline {
                 }
             }
         }
-        //stage('SonarQube analysis') {
-        //    steps {
-        //        script {
-        //            // requires SonarQube Scanner 2.8+
-        //            scannerHome = tool 'sonarqube'
-        //        }
-        //       withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
-        //          sh "${scannerHome}/bin/sonar-scanner"
-        //        }
-        //    }
-        //}
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    // requires SonarQube Scanner 2.8+
+                    scannerHome = tool 'sonarqube'
+                }
+                withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
         stage('Test') {
             steps {
                 tool(name: 'go', type: 'go')
