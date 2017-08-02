@@ -15,7 +15,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 script {
                     // requires SonarQube Scanner 2.8+
