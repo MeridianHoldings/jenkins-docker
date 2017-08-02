@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|
     sudo docker pull sonarqube
     sudo docker pull postgres
     sudo docker run --name sonar-postgres -p 5432:5432 -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -d postgres
-    sudo docker run -d --name sonarqube --link sonar-postgres:pgsonar -p 9000:9000 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD=secret -e SONARQUBE_JDBC_URL=jdbc:postgresql://pgsonar:5432/sonar sonarqube
+    sudo docker run -d --name sonarqube --link sonar-postgres:pgsonar -p 9000:9000 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD=sonar -e SONARQUBE_JDBC_URL=jdbc:postgresql://pgsonar:5432/sonar sonarqube
     sudo docker run -p 8080:8080 --name=jenkins-master jenkins
 
   SHELL
