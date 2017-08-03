@@ -34,16 +34,16 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                    sh 'git checkout origin/master'
-                    sh 'git merge origin/development'
-                    sh 'git checkout origin/master'
-                    sh 'git push origin/master'
-                }
-            }
-        }
+//        stage('Deploy') {
+//            steps {
+//                tool(name: 'go', type: 'go')
+//                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+//                    sh 'git checkout origin/master'
+//                    sh 'git merge origin/development'
+//                   sh 'git checkout origin/master'
+//                    sh 'git push origin/master'
+//                }
+//            }
+//        }
     }
 }
