@@ -22,7 +22,7 @@ pipeline {
                     scannerHome = tool 'sonarqube'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
-                  sh "${scannerHome}/bin/sonar-scanner"
+                  sh "${scannerHome}/sonar-scanner-3.0.3.778/bin/sonar-scanner"
                 }
             }
         }
