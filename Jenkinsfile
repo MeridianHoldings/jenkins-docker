@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
-        SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/sonar-scanner-3.0.3.778"
+        SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
                     scannerHome = tool 'sonarqube'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
-                  sh "${scannerHome}/sonar-scanner-3.0.3.778/bin/sonar-scanner"
+                  sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
