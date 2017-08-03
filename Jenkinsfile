@@ -5,7 +5,7 @@ pipeline {
         SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/"
     }
 
-//    stages {
+    stages {
 //        stage('Code Analysis') {
 //            steps {
 //                tool(name: 'go', type: 'go')
