@@ -79,7 +79,6 @@ Vagrant.configure("2") do |config|
     tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
     sudo chmod -R vagrant:vagrant /usr/local
     sudo chown -R vagrant:vagrant /usr/local
-    tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
     chown -R vagrant:vagrant go/
     sudo chown -R vagrant:vagrant go/
     export PATH=$PATH:/usr/local/go/bin

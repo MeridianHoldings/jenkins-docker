@@ -11,6 +11,7 @@ func main()  {
 }
 
 func Sum() int {
+	// adds two numbers
 	sum := 1 + 1
 	return sum
 }
