@@ -13,8 +13,7 @@ pipeline {
                     sh "pwd"
                     //sh "./go/bin/gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
-                    sh "export GOPATH=/var/jenkins_home/workspace/Jenkins/go"
-                    sh "./go/bin/gocov convert cover.out | ./go/bin/gocov-xml > coverage.xml"
+                    //sh "./go/bin/gocov convert cover.out | ./go/bin/gocov-xml > coverage.xml"
                 }
                 script {
                     // requires SonarQube Scanner 2.8+
