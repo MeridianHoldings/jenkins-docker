@@ -8,15 +8,12 @@ pipeline {
     stages {
         stage('SonarQube Analysis') {
             steps {
-                tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                    sh "./go/bin/gometalinter --checkstyle > report.xml"
-                }
                 script {
                     // requires SonarQube Scanner 2.8+
                     scannerHome = tool 'sonarqube'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+                    sh "./go/bin/gometalinter --checkstyle > report.xml"
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
