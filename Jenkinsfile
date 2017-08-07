@@ -11,7 +11,7 @@ pipeline {
                 tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh "pwd"
-                    sh "./go/bin/gometalinter --checkstyle > report.xml"
+                    //sh "./go/bin/gometalinter --checkstyle > report.xml"
                 }
                 script {
                     // requires SonarQube Scanner 2.8+
