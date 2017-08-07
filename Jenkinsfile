@@ -12,6 +12,9 @@ pipeline {
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh "pwd"
                     //sh "./go/bin/gometalinter --checkstyle > report.xml"
+                    sh "go test -coverprofile=covert.out"
+                    sh "./go/bin/gocov convert covert.out"
+                    sh "./go/bin/gocov-xml >coverage.xml"
                 }
                 script {
                     // requires SonarQube Scanner 2.8+
