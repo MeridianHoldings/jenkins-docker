@@ -10,6 +10,7 @@ pipeline {
             steps {
                 tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+                    sh "./go/bin/gometalinter --install"
                     sh "./go/bin/gometalinter --checkstyle > report.xml"
                 }
                 script {
