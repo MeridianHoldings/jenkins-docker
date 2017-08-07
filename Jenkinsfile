@@ -13,6 +13,8 @@ pipeline {
                     scannerHome = tool 'sonarqube'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+                    sh "export PATH=$PATH:/usr/local/go/bin"
+                    sh "export GOPATH=/var/jenkins_home/workspace/Jenkins/go"
                     sh "./go/bin/gometalinter --install"
                     sh "./go/bin/gometalinter --checkstyle > report.xml"
                     sh "${scannerHome}/bin/sonar-scanner"
