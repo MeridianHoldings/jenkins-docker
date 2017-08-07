@@ -13,7 +13,8 @@ pipeline {
                     scannerHome = tool 'sonarqube'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
-                  sh "${scannerHome}/bin/sonar-scanner"
+                    sh "./go/bin/gometalinter --checkstyle > report.xml"
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
