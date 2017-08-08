@@ -50,7 +50,7 @@ pipeline {
 //                    sh 'git checkout origin/master'
 //                    sh "git remote set-url origin ssh://git@github.com:Luwade/jenkins-docker.git"
                     sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
-                    sh "git push https://${env.name}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
+                    sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
                     //sh 'git push origin HEAD:master'
                 }
             }
