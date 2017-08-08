@@ -48,7 +48,7 @@ pipeline {
 //                    sh 'git checkout origin/master'
 //                    sh 'git merge origin/development'
 //                    sh 'git checkout origin/master'
-//                    sh "git remote set-url origin https://Luwade:Luwade582@github.com/jenkins-docker.git"
+                    sh "git remote set-url origin git@github.com:Luwade/jenkins-docker.git"
                     sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
                     sh "git push git@github.com:Luwade/jenkins-docker.git HEAD:master -f"
                     //sh 'git push origin HEAD:master'
