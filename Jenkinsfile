@@ -49,7 +49,7 @@ pipeline {
 //                    sh 'git merge origin/development'
 //                    sh 'git checkout origin/master'
                     sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
-                    sh "git push https://github.com/Luwade/jenkins-docker.git HEAD:master -f"
+                    sh "git push ssh://git@github.com:Luwade/jenkins-docker.git HEAD:master -f"
                     //sh 'git push origin HEAD:master'
                 }
             }
