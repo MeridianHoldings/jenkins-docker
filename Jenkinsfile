@@ -45,11 +45,8 @@ pipeline {
             steps {
                 tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-//                    sh 'git checkout origin/master'
-//                    sh 'git merge origin/development'
-//                    sh 'git checkout origin/master'
                     sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
-                    sh "git push https://github.com/Luwade/jenkins-docker.git HEAD:master -f"
+                    sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
                     //sh 'git push origin HEAD:master'
                 }
             }
