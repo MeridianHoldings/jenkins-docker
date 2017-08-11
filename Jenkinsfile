@@ -53,6 +53,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
+                tool(name: 'docker', type: 'docker')
                 sh "docker --help"
             }
         }
