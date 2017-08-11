@@ -51,5 +51,10 @@ pipeline {
                 }
             }
         }
+        stage('Build Image') {
+            steps {
+                sh "docker --help"
+            }
+        }
     }
 }
