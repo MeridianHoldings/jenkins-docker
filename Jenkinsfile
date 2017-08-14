@@ -54,7 +54,6 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                docker.build "my-app"
                 sh "docker --help"
             }
         }
