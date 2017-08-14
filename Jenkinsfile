@@ -13,7 +13,8 @@ pipeline {
                     sh "pwd"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
-                    //sh "./go/bin/gocov convert cover.out | ./go/bin/gocov-xml > coverage.xml"
+                    //sh "/var/jenkins_home/workspace/go/bin/./gocov convert cover.out | /var/jenkins_home/workspace/go/bin/./gocov-xml > coverage.xml"
+                    //sh "go test -v ./... | /var/jenkins_home/workspace/go/bin/./go-junit-report > test.xml"
                 }
                 script {
                     // requires SonarQube Scanner 2.8+
@@ -53,7 +54,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                tool(name: 'docker', type: 'docker')
+                docker.build "my-app"
                 sh "docker --help"
             }
         }
