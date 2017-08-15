@@ -54,7 +54,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "docker --help"
+                sh "docker build -t my-app ."
             }
         }
     }
