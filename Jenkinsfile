@@ -55,10 +55,9 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    // requires SonarQube Scanner 2.8+
                     docker_home = tool 'docker'
                 }
-                sh ${docker_home}/bin/docker --help
+                sh "${docker_home}/bin/docker --help"
                 sh "docker build -t my-app ."
             }
         }
