@@ -58,7 +58,8 @@ pipeline {
                     docker_home = tool 'docker'
                 }
                 sh "${docker_home}/bin/docker --help"
-                sh "docker build -t my-app ."
+                sh "${docker_home}/bin/docker build -t my-app ."
+                sh "${docker_home}/bin/docker run --name=my-go-app my-app"
             }
         }
     }
