@@ -57,6 +57,7 @@ pipeline {
                 script {
                     docker_home = tool 'docker'
                 }
+                sh "whoami"
                 sh "${docker_home}/bin/docker --help"
                 // sh "${docker_home}/bin/docker build -t my-app ."
                 sh "${docker_home}/bin/docker run hello-world"
