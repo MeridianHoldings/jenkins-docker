@@ -59,7 +59,7 @@ pipeline {
                 }
                 sh "${docker_home}/bin/docker --help"
                 // sh "${docker_home}/bin/docker build -t my-app ."
-                sh "${docker_home}/bin/docker run hello-world"
+                sh "${docker_home}/bin/sudo docker run hello-world"
             }
         }
     }
