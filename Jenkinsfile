@@ -6,6 +6,25 @@ pipeline {
     }
 
     stages {
+        stage('SonarQube Analysis') {
+            steps {
+                tool(name: 'go', type: 'go')
+                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+                    sh "pwd"
+                    //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
+                    //sh "go test -coverprofile=covert.out"
+                    //sh "/var/jenkins_home/workspace/go/bin/./gocov convert cover.out | /var/jenkins_home/workspace/go/bin/./gocov-xml > coverage.xml"
+                    //sh "go test -v ./... | /var/jenkins_home/workspace/go/bin/./go-junit-report > test.xml"
+                }
+                script {
+                    // requires SonarQube Scanner 2.8+
+                    scannerHome = tool 'sonarqube'
+                }
+                withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
         stage('Test') {
             steps {
                 tool(name: 'go', type: 'go')
