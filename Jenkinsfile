@@ -6,6 +6,7 @@ pipeline {
     }
 
     stages {
+
         stage('Test') {
             steps {
                 tool(name: 'go', type: 'go')
