@@ -11,7 +11,7 @@ pipeline {
                 tool(name: 'go', type: 'go')
                 withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh "pwd"
-                    //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
+                    sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
                     //sh "/var/jenkins_home/workspace/go/bin/./gocov convert cover.out | /var/jenkins_home/workspace/go/bin/./gocov-xml > coverage.xml"
                     //sh "go test -v ./... | /var/jenkins_home/workspace/go/bin/./go-junit-report > test.xml"
