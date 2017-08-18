@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
-        GOBINAR="/var/jenkins_home/workspace/go"
         SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
     }
 
@@ -10,7 +9,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 tool(name: 'go', type: 'go')
-                withEnv(["GOROOT=$GOBINAR", "PATH+GO=$GOBINAR/bin"]) {
+                withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
                     sh "pwd"
                     sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
