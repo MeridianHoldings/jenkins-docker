@@ -16,6 +16,11 @@ pipeline {
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
+                    docker.image('golang:rc-alpine').inside {
+                        stage("") {
+                            sh "cat /etc/os-release"
+                        }
+                    }
                     sh "docker ps"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     sh "cd /home/tomcat/go/src/github.com && ls"
