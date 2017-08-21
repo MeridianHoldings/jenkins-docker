@@ -15,6 +15,7 @@ pipeline {
                 // tool(name: 'go', type: 'go')
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
+                    sh "go env"
                     sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
