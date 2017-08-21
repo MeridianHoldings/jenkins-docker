@@ -16,7 +16,7 @@ pipeline {
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
-                    sh "go get -u github.com/alecthomas/gometalinter"
+                    sh "whoami && sudo go get -u github.com/alecthomas/gometalinter"
                     sh "cd /home/tomcat/go && ls"
                     sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
