@@ -18,7 +18,7 @@ pipeline {
                 }
                 script {
                     // requires SonarQube Scanner 2.8+
-                    scannerHome = tool 'sonarqube'
+                    scannerHome = tool 'sonar'
                 }
                 withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
                     sh "${scannerHome}/bin/sonar-scanner"
