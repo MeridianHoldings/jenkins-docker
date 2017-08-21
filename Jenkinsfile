@@ -17,7 +17,7 @@ pipeline {
                     sh "pwd"
                     sh "go env"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
-                    sh "cd /home/tomcat/go/src && ls"
+                    sh "cd /home/tomcat/go/src/github.com && ls"
                     sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
