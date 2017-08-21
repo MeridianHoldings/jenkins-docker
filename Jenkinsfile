@@ -12,9 +12,11 @@ pipeline {
                 script {
                     goHome = tool 'go'
                 }
-                docker.image('golang:rc-alpine').inside {
-                    stage("docker container") {
-                        sh "cat /etc/os-release"
+                node {
+                    docker.image('golang:rc-alpine').inside {
+                        stage("docker container") {
+                            sh "cat /etc/os-release"
+                        }
                     }
                 }
                 // tool(name: 'go', type: 'go')
