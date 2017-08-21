@@ -16,6 +16,7 @@ pipeline {
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
+                    sh "cd /home/tomcat/go/bin && ls"
                     sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
