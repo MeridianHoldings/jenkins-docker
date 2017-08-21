@@ -9,9 +9,13 @@ pipeline {
     stages {
         stage('SonarQube Analysis') {
             steps {
-                tool(name: 'go', type: 'go')
+                script {
+                    goHome = tool 'go'
+                }
+                // tool(name: 'go', type: 'go')
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
+                    sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
                     //sh "go test -coverprofile=covert.out"
                     //sh "/var/jenkins_home/workspace/go/bin/./gocov convert cover.out | /var/jenkins_home/workspace/go/bin/./gocov-xml > coverage.xml"
