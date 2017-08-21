@@ -47,7 +47,7 @@ pipeline {
             steps {
                 tool(name: 'go', type: 'go')
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
-                    sh "git fetch --tags --progress https://github.com/MeridianHoldings/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
+                    sh "git fetch --tags --progress https://${env.username}:${env.password}@github.com/MeridianHoldings/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
                     sh "git push https://${env.username}:${env.password}@github.com/MeridianHoldings/jenkins-docker.git HEAD:master -f"
                     //sh 'git push origin HEAD:master'
                 }
