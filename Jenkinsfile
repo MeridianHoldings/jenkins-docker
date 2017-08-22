@@ -19,6 +19,7 @@ node {
   // Start a docker container using the golang:1.8.0-alpine image, mount the current directory to the goPath we specified earlier
   stage("Check images") {
     sh "docker ps --all"
+    sh "pwd && ls"
   }
   stage("Create binaries") {
     docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath} --user root") {
