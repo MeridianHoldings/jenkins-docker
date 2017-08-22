@@ -22,6 +22,7 @@ node {
       sh "env"
       sh "go get -u github.com/alecthomas/gometalinter"
       sh "cd /go/bin && ls"
+      sh "gometalinter --install"
     }
   }
 }
