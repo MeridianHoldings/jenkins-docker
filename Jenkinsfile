@@ -23,6 +23,14 @@ node {
       sh "go get -u github.com/alecthomas/gometalinter"
       sh "cd /go/bin && ls"
       sh "gometalinter --install"
+      sh "gometalinter --checkstyle > report.xml"
+      sh "go get github.com/axw/gocov/..."
+      sh "go get github.com/AlekSi/gocov-xml"
+      sh "go test -coverprofile=cover.out"
+      sh "gocov convert cover.out | gocov-xml > coverage.xml"
+      sh "go get -u github.com/jstemmer/go-junit-report"
+      sh "go test -v ./... | go-junit-report > test.xml"
+      sh "ls"
     }
   }
 }
