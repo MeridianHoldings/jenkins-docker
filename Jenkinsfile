@@ -7,7 +7,7 @@ pipeline {
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
     }
-
+    String goPath = "/home/tomcat/go"
     stages {
         // Start a docker container using the golang:1.8.0-alpine image, mount the current directory to the goPath we specified earlier
         stage("Create binaries") {
