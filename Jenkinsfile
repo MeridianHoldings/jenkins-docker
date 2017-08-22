@@ -46,7 +46,7 @@ node {
         }
         script {
             // requires SonarQube Scanner 2.8+
-            scannerHome = tool 'sonarqube'
+            scannerHome = tool 'sonar'
         }
         withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
             sh "${scannerHome}/bin/sonar-scanner"
@@ -61,31 +61,25 @@ node {
         }
     }
     stage('Build') {
-        steps {
-            tool(name: 'go', type: 'go')
-            withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                sh 'go build main.go'
-                sh 'echo Build complete'
-            }
+        tool(name: 'go', type: 'go')
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+            sh 'go build main.go'
+            sh 'echo Build complete'
         }
     }
     stage('Deploy') {
-        steps {
-            tool(name: 'go', type: 'go')
-            withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
-                sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
-                //sh 'git push origin HEAD:master'
-            }
+        tool(name: 'go', type: 'go')
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+            sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
+            sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
+            //sh 'git push origin HEAD:master'
         }
     }
     stage('Build Image') {
-        steps {
-            script {
-                docker_home = tool 'docker'
-            }
-            sh "${docker_home}/bin/docker build -t my-app ."
-            sh "${docker_home}/bin/docker run my-app"
+        script {
+            docker_home = tool 'docker'
         }
+        sh "${docker_home}/bin/docker build -t my-app ."
+        sh "${docker_home}/bin/docker run my-app"
     }
 }
