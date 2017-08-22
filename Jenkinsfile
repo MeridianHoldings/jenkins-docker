@@ -11,16 +11,16 @@ pipeline {
             steps {
                 script {
                     goHome = tool 'go'
-                docker.image('golang:rc-alpine').inside {
-                    stage("docker container") {
-                        sh "cat /etc/os-release"
-                    }
                 }
-                }
-                // tool(name: 'go', type: 'go')
+                tool(name: 'docker', type: 'docker')
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
+                    docker.image('golang:rc-alpine').inside {
+                        stage("") {
+                            sh "cat /etc/os-release"
+                        }
+                    }
                     sh "docker ps"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     sh "cd /home/tomcat/go/src/github.com && ls"
