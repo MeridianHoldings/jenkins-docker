@@ -60,7 +60,7 @@ node {
     }
     stage('Build') {
         tool(name: 'go', type: 'go')
-        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["GOROOT=$GOROOT", "PATH+GO=$GOROOT/bin"]) {
             sh 'go build main.go'
             sh 'echo Build complete'
         }
