@@ -20,6 +20,7 @@ node {
   stage("Create binaries") {
     docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath}") {
       sh "env"
+      sh "ls"
     }
   }
 }
