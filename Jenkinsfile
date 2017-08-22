@@ -1,7 +1,7 @@
 #!groovy​
 
 pipeline {
-    agent {docker 'golang:1.8.3'}
+    agent any
     environment {
         GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
@@ -16,7 +16,7 @@ pipeline {
                     dockerHome = tool 'docker'
                     golang = docker.image('golang:1.8.3')
                     golang.inside {
-                        sh 'go get -u github.com/alecthomas/gometalinter'
+                        sh 'env && whoami'
                     }
                 }
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
