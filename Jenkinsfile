@@ -42,18 +42,16 @@ node {
         }
     }
     stage('SonarQube Analysis') {
-        steps {
-            tool(name: 'go', type: 'go')
-            withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-                sh "pwd"
-            }
-            script {
-                // requires SonarQube Scanner 2.8+
-                scannerHome = tool 'sonarqube'
-            }
-            withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
+        tool(name: 'go', type: 'go')
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+            sh "pwd"
+        }
+        script {
+            // requires SonarQube Scanner 2.8+
+            scannerHome = tool 'sonarqube'
+        }
+        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
     }
     stage('Test') {
