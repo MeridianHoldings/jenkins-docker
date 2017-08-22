@@ -12,7 +12,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    goHome = tool 'go'
+                    // goHome = tool 'go'
                     dockerHome = tool 'docker'
                     golang = docker.image('golang:1.8.3')
                     golang.inside {
