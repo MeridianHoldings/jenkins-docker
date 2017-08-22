@@ -19,6 +19,7 @@ pipeline {
                     sh "pwd"
                     sh "go env"
                     sh "${dockerHome}/bin/docker run golang:1.8.3"
+                    sh "${dockerHome}/bin/docker ps"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     // sh "cd /home/tomcat/go/src/github.com && ls"
                     sh "${goHome}/bin/gometalinter"
