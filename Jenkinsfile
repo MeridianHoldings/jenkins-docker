@@ -14,12 +14,12 @@ pipeline {
                 script {
                     goHome = tool 'go'
                     dockerHome = tool 'docker'
-                }
-                withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     golang = docker.image('golang:1.8.3')
                     golang.inside {
                         sh 'go version'
                     }
+                }
+                withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     //sh "go env"
                     sh "${dockerHome}/bin/docker ps --all"
