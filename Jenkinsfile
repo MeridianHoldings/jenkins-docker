@@ -20,7 +20,7 @@ node {
   stage("Create binaries") {
     docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath}") {
       sh "env"
-      sh "su - root && go get -u github.com/alecthomas/gometalinter"
+      sh "su - tomcat && go get -u github.com/alecthomas/gometalinter"
     }
   }
 }
