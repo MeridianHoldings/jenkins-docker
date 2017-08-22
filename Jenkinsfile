@@ -17,7 +17,7 @@ pipeline {
                 }
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
-                    sh "go env"
+                    //sh "go env"
                     sh "${dockerHome}/bin/docker ps --all"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     // sh "cd /home/tomcat/go/src/github.com && ls"
