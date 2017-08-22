@@ -1,7 +1,12 @@
 #!groovy​
 
 pipeline {
-    agent docker
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            label 'my-defined-label'
+        }
+    }
     environment {
         GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
