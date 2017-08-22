@@ -9,7 +9,7 @@ node {
     String buildNumber = "0.1.${env.BUILD_NUMBER}"
     // Path we will mount the project to for the Docker container
     String goPath = "/home/tomcat/go"
-    String GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
+    String GOCONFIG_PATH="/${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
     String SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
 
     // Checkout the code from Github, stages allow Jenkins to visualize the different sections of your build steps in the UI
@@ -43,7 +43,6 @@ node {
         tool(name: 'go', type: 'go')
         withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
             sh "pwd"
-            sh "go env"
         }
         script {
             // requires SonarQube Scanner 2.8+
@@ -54,11 +53,9 @@ node {
         }
     }
     stage('Test') {
-        script {
-            goHome = tool 'go'
-        }
+        tool(name: 'go', type: 'go')
         withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-            sh '${goHome}/bin/go test'
+            sh 'go test'
         }
     }
     stage('Build') {
