@@ -1,11 +1,7 @@
 #!groovy​
 
 pipeline {
-    agent {
-        docker {
-            image 'golang:1.8.3'
-        }
-    }
+    agent any
     environment {
         GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
