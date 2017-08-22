@@ -41,26 +41,26 @@ node {
     }
     stage('SonarQube Analysis') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
             sh "pwd"
         }
         script {
             // requires SonarQube Scanner 2.8+
             scannerHome = tool 'sonar'
         }
-        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
             sh "${scannerHome}/bin/sonar-scanner"
         }
     }
     stage('Test') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
             sh 'go test'
         }
     }
     stage('Build') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
             sh 'go build main.go'
             sh 'echo Build complete'
         }
