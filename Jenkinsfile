@@ -9,10 +9,8 @@ node {
     String buildNumber = "0.1.${env.BUILD_NUMBER}"
     // Path we will mount the project to for the Docker container
     String goPath = "/home/tomcat/go"
-    environment {
-        GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
-        SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
-    }
+    String GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
+    String SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
 
     // Checkout the code from Github, stages allow Jenkins to visualize the different sections of your build steps in the UI
     stage('Checkout from GitHub') {
