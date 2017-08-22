@@ -19,7 +19,7 @@ pipeline {
                     sh "pwd"
                      sh "go env"
                     sh "${dockerHome}/bin/docker ps"
-                    // sh "whoami && go get -u github.com/alecthomas/gometalinter"
+                     sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     // sh "cd /home/tomcat/go/src/github.com && ls"
                     sh "${goHome}/bin/gometalinter"
                     //sh "/var/jenkins_home/workspace/go/bin/./gometalinter --checkstyle > report.xml"
