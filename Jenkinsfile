@@ -12,7 +12,7 @@ pipeline {
         stage('Example Build') {
             agent {docker 'golang:1.8.3'}
             steps {
-                sh 'go version'
+                sh 'go get -u github.com/alecthomas/gometalinter'
             }
         }
         stage('SonarQube Analysis') {
