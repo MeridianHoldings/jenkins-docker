@@ -1,7 +1,7 @@
 #!groovy​
 
 pipeline {
-    agent none
+    agent any
     environment {
         GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
@@ -9,17 +9,16 @@ pipeline {
     }
 
     stages {
-        stage('Example Build') {
-            agent {docker 'golang:1.8.3'}
-            steps {
-                sh 'go get -u github.com/alecthomas/gometalinter'
-            }
-        }
         stage('SonarQube Analysis') {
             steps {
                 script {
                     goHome = tool 'go'
                     dockerHome = tool 'docker'
+                    docker.image('golang:1.8.3').inside {
+                        stage("Install Gometalinter") {
+                          sh "go get -u github.com/alecthomas/gometalinter"
+                        }
+                    }
                 }
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
