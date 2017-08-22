@@ -16,7 +16,7 @@ pipeline {
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
-                    docker.image('golang:rc-alpine').inside {
+                    def docker.image('golang:rc-alpine').inside {
                         stage("") {
                             sh "cat /etc/os-release"
                         }
