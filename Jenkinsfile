@@ -2,12 +2,12 @@
 
 pipeline {
     agent any
-    environment {
-        GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
+    //environment {
+    //    GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
-        SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
-        goPath = "/home/tomcat/go"
-    }
+    //    SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
+    //    goPath = "/home/tomcat/go"
+    //}
     stages {
         stage('SonarQube Analysis') {
             steps {
