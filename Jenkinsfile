@@ -9,7 +9,7 @@ node {
     String buildNumber = "0.1.${env.BUILD_NUMBER}"
     // Path we will mount the project to for the Docker container
     String goPath = "/home/tomcat/go"
-    String GOCONFIG_PATH="/${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
+    String GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
     String SONARCONFIG_PATH = "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube"
 
     // Checkout the code from Github, stages allow Jenkins to visualize the different sections of your build steps in the UI
@@ -41,33 +41,33 @@ node {
     }
     stage('SonarQube Analysis') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "pwd"
         }
         script {
             // requires SonarQube Scanner 2.8+
             scannerHome = tool 'sonar'
         }
-        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "${scannerHome}/bin/sonar-scanner"
         }
     }
     stage('Test') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh 'go test'
         }
     }
     stage('Build') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh 'go build main.go'
             sh 'echo Build complete'
         }
     }
     stage('Deploy') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
+        withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
             sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
             //sh 'git push origin HEAD:master'
