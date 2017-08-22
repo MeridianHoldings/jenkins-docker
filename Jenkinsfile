@@ -1,7 +1,7 @@
 #!groovy​
 
 pipeline {
-    agent none
+    agent {docker 'golang:1.8.3'}
     environment {
         GOROOT = "${JENKINS_HOME}/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
         // GOCONFIG_PATH="/var/jenkins_home/tools/org.jenkinsci.plugins.golang.GolangInstallation/go"
