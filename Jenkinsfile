@@ -53,9 +53,11 @@ node {
         }
     }
     stage('Test') {
-        tool(name: 'go', type: 'go')
+        script {
+            goHome = tool 'go'
+        }
         withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
-            sh 'go test'
+            sh '${goHome}/bin/go test'
         }
     }
     stage('Build') {
