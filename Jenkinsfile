@@ -16,7 +16,7 @@ pipeline {
                     dockerHome = tool 'docker'
                 }
                 script {
-                    docker.image(golang:1.8.3) {
+                    docker.image('golang:1.8.3') {
                         stage('Go Version') {
                             sh 'go version'
                         }
