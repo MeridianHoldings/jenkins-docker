@@ -9,17 +9,6 @@ pipeline {
         goPath = "/home/tomcat/go"
     }
     stages {
-        // Start a docker container using the golang:1.8.0-alpine image, mount the current directory to the goPath we specified earlier
-        stage("Create binaries") {
-            agent {docker 'golang:1.8.3'}
-            steps {
-                script {
-                    docker.image("golang:1.8.3") {
-                            sh "go version"
-                    }
-                }
-            }
-        }
         stage('SonarQube Analysis') {
             steps {
                 script {
@@ -29,7 +18,7 @@ pipeline {
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                     sh "go env"
-                    sh "${dockerHome}/bin/docker ps"
+                    sh "${dockerHome}/bin/docker run golang:1.8.3"
                     // sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     // sh "cd /home/tomcat/go/src/github.com && ls"
                     sh "${goHome}/bin/gometalinter"
