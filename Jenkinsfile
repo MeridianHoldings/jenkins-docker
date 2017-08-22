@@ -17,6 +17,7 @@ pipeline {
                 }
                 node {
                     stage("Main Build") {
+                        checkout scm
                         docker.image('golang:1.8.3').inside {
                             stage("Install Gometalinter") {
                               sh "go get -u github.com/alecthomas/gometalinter"
