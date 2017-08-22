@@ -13,9 +13,11 @@ pipeline {
         stage("Create binaries") {
             agent {docker 'golang:1.8.3'}
             steps {
-                docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath}") {
-                    for (command in binaryBuildCommands) {
-                        sh "go version"
+                script {
+                    docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath}") {
+                        for (command in binaryBuildCommands) {
+                            sh "go version"
+                        }
                     }
                 }
             }
