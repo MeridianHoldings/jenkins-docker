@@ -41,33 +41,33 @@ node {
     }
     stage('SonarQube Analysis') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "pwd"
         }
         script {
             // requires SonarQube Scanner 2.8+
             scannerHome = tool 'sonar'
         }
-        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GO=SONARCONFIG_PATH/bin"]) {
+        withEnv(["GOROOT=$SONARCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "${scannerHome}/bin/sonar-scanner"
         }
     }
     stage('Test') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh 'go test'
         }
     }
     stage('Build') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh 'go build main.go'
             sh 'echo Build complete'
         }
     }
     stage('Deploy') {
         tool(name: 'go', type: 'go')
-        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GO=$GOCONFIG_PATH/bin"]) {
+        withEnv(["GOROOT=$GOCONFIG_PATH", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "git fetch --tags --progress https://github.com/Luwade/jenkins-docker.git +refs/heads/development:refs/remotes/origin/development"
             sh "git push https://${env.username}:${env.password}@github.com/Luwade/jenkins-docker.git HEAD:master -f"
             //sh 'git push origin HEAD:master'
