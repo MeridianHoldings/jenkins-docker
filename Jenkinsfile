@@ -11,15 +11,29 @@ pipeline {
     stages {
         stage('SonarQube Analysis') {
             steps {
+                node {
+                    stage "Prepare environment"
+                        checkout scm
+                        def environment  = docker.build 'golang:1.8.3'
+
+                        environment.inside {
+                            stage "Checkout and build deps"
+                                sh "go version"
+                        }
+                }
                 script {
                     goHome = tool 'go'
                     dockerHome = tool 'docker'
+                }
+                docker.image('golang:1.8.3').inside {
+                    stage("Install Gometalinter") {
+                      sh "go get -u github.com/alecthomas/gometalinter"
+                    }
                 }
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
                     sh "pwd"
                      sh "go env"
                     sh "${dockerHome}/bin/docker ps"
-                    sh "${dockerHome}/bin/docker run --rm -it golang:1.8.3 && go get -u github.com/alecthomas/gometalinter"
                      sh "whoami && go get -u github.com/alecthomas/gometalinter"
                     // sh "cd /home/tomcat/go/src/github.com && ls"
                     sh "${goHome}/bin/gometalinter"
