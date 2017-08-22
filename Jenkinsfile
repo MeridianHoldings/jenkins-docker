@@ -18,7 +18,7 @@ node {
 
   // Start a docker container using the golang:1.8.0-alpine image, mount the current directory to the goPath we specified earlier
   stage("Create binaries") {
-    docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath} --user tomcat") {
+    docker.image("golang:1.8.3").inside("-v ${pwd()}:${goPath} --user root") {
       sh "env"
       sh "cd /go/bin && ls"
       sh "whoami"
