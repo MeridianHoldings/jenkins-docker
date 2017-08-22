@@ -14,9 +14,8 @@ pipeline {
                 script {
                     // goHome = tool 'go'
                     dockerHome = tool 'docker'
-                    golang = docker.image('golang:1.8.3')
-                    golang.inside {
-                        sh 'env && whoami'
+                    docker.image("golang:1.8.3") {
+                        sh "env && whoami"
                     }
                 }
                 withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
