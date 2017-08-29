@@ -39,7 +39,6 @@ node {
         tool(name: 'go', type: 'go')
         withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "pwd"
-            sh "${env.WORKSPACE}"
             sh "sed -i 's|/go/src/github.com/MeridianHoldings/jenkins-docker|${env.WORKSPACE}|' coverage.xml"
         }
         script {
