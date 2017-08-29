@@ -39,7 +39,8 @@ node {
         tool(name: 'go', type: 'go')
         withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "pwd"
-            sh "sed -i 's|/go/src/github.com/MeridianHoldings/jenkins-docker|pwd|' coverage.xml"
+            sh "${WORKSPACE}"
+            sh "sed -i 's|/go/src/github.com/MeridianHoldings/jenkins-docker|${WORKSPACE}|' coverage.xml"
         }
         script {
             // requires SonarQube Scanner 2.8+
