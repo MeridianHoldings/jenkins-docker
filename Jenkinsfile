@@ -30,7 +30,6 @@ node {
             sh "go get github.com/MeridianHoldings/jenkins-docker"
             sh "go test -coverprofile=cover.out github.com/MeridianHoldings/jenkins-docker"
             sh "gocov convert cover.out | gocov-xml > coverage.xml"
-            sh "sed -i 's|/go/src/github.com/MeridianHoldings/jenkins-docker|${pwd}' coverage.xml"
             sh "go get -u github.com/jstemmer/go-junit-report"
             sh "go test -v ./... github.com/MeridianHoldings/jenkins-docker | go-junit-report > test.xml"
             sh "ls"
@@ -40,6 +39,7 @@ node {
         tool(name: 'go', type: 'go')
         withEnv(["PATH+GO=${GOROOT}/bin", "PATH+GIT=${GIT_EXEC_PATH}"]) {
             sh "pwd"
+            sh "sed -i 's|/go/src/github.com/MeridianHoldings/jenkins-docker|${pwd}|' coverage.xml"
         }
         script {
             // requires SonarQube Scanner 2.8+
