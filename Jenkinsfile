@@ -27,10 +27,10 @@ node {
             // sh "gometalinter --checkstyle > report.xml"
             sh "go get github.com/axw/gocov/..."
             sh "go get github.com/AlekSi/gocov-xml"
-            sh "go test -coverprofile=cover.out"
-            //sh "gocov convert cover.out | gocov-xml > coverage.xml"
+            sh "go test -coverprofile=cover.out github.com/MeridianHoldings/jenkins-docker"
+            sh "gocov convert cover.out | gocov-xml > coverage.xml"
             sh "go get -u github.com/jstemmer/go-junit-report"
-            sh "go test -v ./... | go-junit-report > test.xml"
+            sh "go test -v ./... github.com/MeridianHoldings/jenkins-docker | go-junit-report > test.xml"
             sh "ls"
         }
     }
