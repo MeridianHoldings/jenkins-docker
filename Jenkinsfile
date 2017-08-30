@@ -24,7 +24,7 @@ node {
             sh "go get -u github.com/alecthomas/gometalinter"
             sh "cd /go/bin && ls"
             sh "gometalinter --install"
-            // sh "gometalinter --checkstyle > report.xml"
+            sh "gometalinter --checkstyle > report.xml"
             sh "go get github.com/axw/gocov/..."
             sh "go get github.com/AlekSi/gocov-xml"
             sh "go get github.com/MeridianHoldings/jenkins-docker"
